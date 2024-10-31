@@ -3,145 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>El Rincón Oscuro</title>
-    <style>
-        body {
-            background-color: black;
-            color: white;
-            font-family: 'Shadows Into Light', cursive;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-        }
-
-        #intro, #content, #grieta, #stories {
-            margin: auto;
-            padding: 20px;
-            border: 2px solid gray;
-            border-radius: 10px;
-            background: rgba(50, 50, 50, 0.8);
-            max-width: 600px;
-            display: none; /* Ocultar por defecto */
-        }
-
-        #intro {
-            display: block; /* Mostrar solo el intro inicialmente */
-        }
-
-        input[type="text"] {
-            font-size: 20px;
-            padding: 10px;
-            width: 80%; /* Ancho de la casilla de entrada */
-            margin-top: 10px;
-        }
-
-        button {
-            background-color: #444;
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            margin-top: 10px;
-            transition: background-color 0.3s;
-        }
-
-        button:hover {
-            background-color: #666;
-        }
-
-        .story {
-            margin: 10px;
-            padding: 10px;
-            border: 2px solid red;
-            border-radius: 5px;
-            display: block;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
+    <title>Las Ruinas De El Perdido</title>
 </head>
 <body>
-    <div id="intro">
+    <div id="intro" class="text-container">
         <h1>¡Bienvenido a El Rincón Oscuro!</h1>
-        <h2>Introduce el código: <strong>El Anillo Está Observando</strong></h2>
-        <input type="text" id="codeInput" placeholder="Código...">
+        <h2>Introduce el código:</h2>
+        <input type="text" id="codeInput" placeholder="Introduce el código aquí..." class="input-large">
         <button onclick="checkCode()">Enviar</button>
-        <p id="error" style="color:red; display:none;">Código incorrecto. Intenta de nuevo.</p>
+        <p id="error" class="hidden">Código incorrecto. Intenta de nuevo.</p>
     </div>
 
-    <div id="content">
+    <div id="content" class="hidden">
+        <div id="book" onclick="toggleStories()">
+            📖 Abrir Libro
+        </div>
+        <div id="grieta" class="hidden" onclick="showCages()">
+            🕳️ La Grieta
+        </div>
+        <h3>Ingresa una fecha:</h3>
+        <input type="date" id="dateInput">
+        <button onclick="checkDate()">Ver Historia</button>
+        <div id="historyContainer" class="hidden">
+            <h3>Historia:</h3>
+            <p id="historyText"></p>
+        </div>
+
         <h3>Los secretos de los maestros:</h3>
-        <input type="text" id="letterInput" maxlength="7" placeholder="Introduce 7 letras...">
-        <button onclick="checkLetter()">Ver Grieta</button>
-        
-        <div id="grieta" style="display:none;">
-            <h3>¡Has encontrado una grieta!</h3>
-            <button onclick="showCracks()">Ver jaulas</button>
-            <button onclick="goBackToContent()">Volver a las fechas</button>
-        </div>
-
-        <div id="book" style="margin-top: 20px; cursor: pointer;" onclick="showStories()">
-            📖 Abre el libro de historias
-        </div>
+        <input type="text" id="letterInput" maxlength="7" placeholder="Introduce 7 letras aquí...">
     </div>
 
-    <div id="stories">
+    <div id="stories" class="hidden">
         <h3>Historias Desbloqueadas</h3>
-        <div class="story">🔒 Historia 1</div>
-        <div class="story">🔒 Historia 2</div>
-        <div class="story">🔒 Historia 3</div>
-        <div class="story">🔒 Historia 4</div>
-        <div class="story">🔒 Historia 5</div>
-        <div class="story">🔒 Historia 6</div>
-        <div class="story">🔒 Historia 7</div>
-        <div class="story">🔒 Historia 8</div>
-        <div class="story">🔒 Historia 9</div>
-        <div class="story">🔒 Historia 10</div>
-        <div class="story">🔒 Historia 11</div>
-        <div class="story">🔒 Historia 12</div>
-        <div class="story">🔒 Historia 13</div>
-        <div class="story">🔒 Historia 14</div>
-        <div class="story">🔒 Historia 15</div>
-        <button onclick="goBack()">Volver a las fechas</button>
+        <div class="story" id="story1">🔒 Historia 1</div>
+        <div class="story" id="story2">🔒 Historia 2</div>
+        <div class="story" id="story3">🔒 Historia 3</div>
+        <div class="story" id="story4">🔒 Historia 4</div>
+        <div class="story" id="story5">🔒 Historia 5</div>
+        <div class="story" id="story6">🔒 Historia 6</div>
+        <div class="story" id="story7">🔒 Historia 7</div>
+        <div class="story" id="story8">🔒 Historia 8</div>
+        <div class="story" id="story9">🔒 Historia 9</div>
+        <div class="story" id="story10">🔒 Historia 10</div>
+        <div class="story" id="story11">🔒 Historia 11</div>
+        <div class="story" id="story12">🔒 Historia 12</div>
+        <div class="story" id="story13">🔒 Historia 13</div>
+        <div class="story" id="story14">🔒 Historia 14</div>
+        <div class="story" id="story15">🔒 Historia 15</div>
+        <button onclick="goBack()">← Volver</button>
     </div>
 
-    <script>
-        function checkCode() {
-            const code = document.getElementById('codeInput').value;
-            if (code === "El Anillo Está Observando") {
-                document.getElementById('intro').style.display = "none";
-                document.getElementById('content').style.display = "block";
-            } else {
-                document.getElementById('error').style.display = "block";
-            }
-        }
+    <div id="cages" class="hidden">
+        <h3>Las Jaulas de la Grieta</h3>
+        <div class="cage-container">
+            <div class="cage" style="background-color: red;">🔒 Jaula Roja</div>
+            <div class="cage" style="background-color: green;">🔒 Jaula Verde</div>
+            <div class="cage" style="background-color: blue;">🔒 Jaula Azul</div>
+            <div class="cage" style="background-color: white;">🔒 Jaula Blanca</div>
+            <div class="cage" style="background-color: black;">🔒 Jaula Negra</div>
+        </div>
+        <button onclick="goBackFromCages()">← Volver</button>
+    </div>
 
-        function checkLetter() {
-            const letterInput = document.getElementById('letterInput').value;
-            if (letterInput.length === 7) {
-                document.getElementById('grieta').style.display = "block";
-            } else {
-                alert("Introduce exactamente 7 letras.");
-            }
-        }
-
-        function showCracks() {
-            alert("Aquí se mostrarán las jaulas en forma de estrella.");
-            // Aquí puedes añadir la lógica para mostrar las jaulas.
-        }
-
-        function goBackToContent() {
-            document.getElementById('grieta').style.display = "none";
-            document.getElementById('content').style.display = "block";
-        }
-
-        function showStories() {
-            document.getElementById('stories').style.display = "block";
-        }
-
-        function goBack() {
-            document.getElementById('stories').style.display = "none";
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
