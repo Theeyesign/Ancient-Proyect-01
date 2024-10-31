@@ -4,51 +4,67 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
-    <title>Las Ruinas De El Perdido</title>
+    <title>El Rincón Oscuro</title>
 </head>
 <body>
+    <!-- Pantalla inicial -->
     <div id="intro" class="text-container">
-        <h1>¡Bienvenido a El Rincón Oscuro!</h1>
+        <h1>Bienvenido a El Rincón Oscuro</h1>
         <input type="text" id="codeInput" placeholder="Introduce el código aquí...">
-        <button onclick="checkCode()">Enviar</button>
-        <p id="error" class="hidden">Código incorrecto. Intenta de nuevo.</p>
+        <button onclick="checkMainCode()">Enviar</button>
+        <p id="errorMessage" class="hidden">Error. Código incorrecto.</p>
     </div>
 
+    <!-- Pantalla de contenido con fechas y palabras -->
     <div id="content" class="hidden">
-        <div id="book" onclick="toggleStories()" class="animated">📖</div>
-        <div id="stories" class="hidden">
-            <h3>Historias Desbloqueadas</h3>
-            <div class="story">🔒 Historia 1</div>
-            <!-- Añade más historias aquí si necesitas -->
+        <!-- Área de fecha y palabras -->
+        <div id="dateAndWordArea">
+            <h3>Ingresa una fecha:</h3>
+            <input type="date" id="dateInput">
+            <button onclick="checkDate()">Ver Historia</button>
+            <div id="historyContainer" class="hidden">
+                <h3>Historia:</h3>
+                <p id="historyText"></p>
+            </div>
+
+            <h3>Los secretos de los maestros:</h3>
+            <input type="text" id="letterInput" maxlength="7" placeholder="Introduce 7 letras aquí...">
         </div>
 
-        <h3>Ingresa una fecha:</h3>
-        <input type="date" id="dateInput">
-        <button onclick="checkDate()">Ver Historia</button>
-        <div id="historyContainer" class="hidden">
-            <h3>Historia:</h3>
-            <p id="historyText"></p>
-        </div>
-
-        <h3>Los secretos de los maestros:</h3>
-        <input type="text" id="letterInput" maxlength="7" placeholder="Introduce 7 letras aquí...">
-        
-        <div id="hole" onclick="toggleHole()">
-            <div class="crack">🕳️</div>
+        <!-- Libro con 15 historias -->
+        <div id="book" onclick="showBook()">
+            📖
         </div>
     </div>
 
-    <div id="cages" class="hidden">
-        <h3>Jaulas</h3>
-        <div class="cage" style="background-color: red;">🔒 Jaula Roja</div>
-        <div class="cage" style="background-color: green;">🔒 Jaula Verde</div>
-        <div class="cage" style="background-color: blue;">🔒 Jaula Azul</div>
-        <div class="cage" style="background-color: white;">🔒 Jaula Blanca</div>
-        <div class="cage" style="background-color: black;">🔒 Jaula Negra</div>
-        <button onclick="toggleCages()">Volver</button>
+    <!-- Grieta para acceder a las 5 cajas -->
+    <div id="grietaContainer" class="hidden">
+        <div id="grieta" onclick="showCrackArea()">🕳️</div>
+    </div>
+
+    <!-- Sección de historias -->
+    <div id="storySection" class="hidden">
+        <h3>Historias Desbloqueadas</h3>
+        <div class="stories-list">
+            <div class="story" id="story1">🔒 Historia 1</div>
+            <div class="story" id="story2">🔒 Historia 2</div>
+            <!-- Añadir hasta Historia 15 -->
+        </div>
+        <button onclick="returnToContent()">↩️ Volver</button>
+    </div>
+
+    <!-- Sección de cajas de colores -->
+    <div id="crackSection" class="hidden">
+        <h3>Cajas de los Colores</h3>
+        <div class="caja roja">🔒 Roja</div>
+        <div class="caja verde">🔒 Verde</div>
+        <div class="caja azul">🔒 Azul</div>
+        <div class="caja blanca">🔒 Blanca</div>
+        <div class="caja negra">🔒 Negra</div>
+        <button onclick="returnToContent()">↩️ Volver</button>
     </div>
 
     <script src="script.js"></script>
 </body>
 </html>
+
