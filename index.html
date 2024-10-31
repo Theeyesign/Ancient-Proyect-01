@@ -5,66 +5,167 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>El Rincón Oscuro</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: 'Shadows Into Light', cursive;
+            text-align: center;
+        }
+
+        #intro, #content, #grieta, #book, #stories {
+            margin: 20px;
+            padding: 20px;
+            border: 2px solid gray;
+            border-radius: 10px;
+            background: rgba(50, 50, 50, 0.8);
+        }
+
+        #grieta {
+            display: none; /* Grieta oculta por defecto */
+        }
+
+        #stories {
+            display: none; /* Historias ocultas por defecto */
+        }
+
+        .story {
+            margin: 10px;
+            padding: 10px;
+            border: 2px solid red;
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        #crack {
+            display: none; /* Grieta oculta por defecto */
+        }
+
+        .key {
+            display: none; /* Candados ocultos por defecto */
+        }
+
+        .button {
+            background-color: #444;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #666;
+        }
+    </style>
 </head>
 <body>
-    <!-- Pantalla inicial -->
     <div id="intro" class="text-container">
-        <h1>Bienvenido a El Rincón Oscuro</h1>
+        <h1>¡Bienvenido a El Rincón Oscuro!</h1>
+        <h2>Introduce el código: <strong>El Anillo Está Observando</strong></h2>
         <input type="text" id="codeInput" placeholder="Introduce el código aquí...">
-        <button onclick="checkMainCode()">Enviar</button>
-        <p id="errorMessage" class="hidden">Error. Código incorrecto.</p>
+        <button class="button" onclick="checkCode()">Enviar</button>
+        <p id="error" class="hidden">Código incorrecto. Intenta de nuevo.</p>
     </div>
 
-    <!-- Pantalla de contenido con fechas y palabras -->
+    <div id="grieta" class="hidden">
+        <h3>¡Has encontrado una grieta!</h3>
+        <p>Introduce el código: <strong>El vacío</strong></p>
+        <input type="text" id="crackInput" placeholder="Introduce el código aquí...">
+        <button class="button" onclick="checkCrackCode()">Enviar</button>
+        <div id="crack" class="hidden">
+            <h3>Jaulas encontradas:</h3>
+            <div class="key" id="key1">🔒 Rojo</div>
+            <div class="key" id="key2">🔒 Verde</div>
+            <div class="key" id="key3">🔒 Azul</div>
+            <div class="key" id="key4">🔒 Blanco</div>
+            <div class="key" id="key5">🔒 Negro</div>
+        </div>
+    </div>
+
     <div id="content" class="hidden">
-        <!-- Área de fecha y palabras -->
-        <div id="dateAndWordArea">
-            <h3>Ingresa una fecha:</h3>
-            <input type="date" id="dateInput">
-            <button onclick="checkDate()">Ver Historia</button>
-            <div id="historyContainer" class="hidden">
-                <h3>Historia:</h3>
-                <p id="historyText"></p>
-            </div>
-
-            <h3>Los secretos de los maestros:</h3>
-            <input type="text" id="letterInput" maxlength="7" placeholder="Introduce 7 letras aquí...">
+        <div id="book" onclick="toggleStories()" class="button">
+            📖 Abre el libro de historias
         </div>
-
-        <!-- Libro con 15 historias -->
-        <div id="book" onclick="showBook()">
-            📖
-        </div>
-    </div>
-
-    <!-- Grieta para acceder a las 5 cajas -->
-    <div id="grietaContainer" class="hidden">
-        <div id="grieta" onclick="showCrackArea()">🕳️</div>
-    </div>
-
-    <!-- Sección de historias -->
-    <div id="storySection" class="hidden">
-        <h3>Historias Desbloqueadas</h3>
-        <div class="stories-list">
+        <div id="stories">
+            <h3>Historias Desbloqueadas</h3>
             <div class="story" id="story1">🔒 Historia 1</div>
             <div class="story" id="story2">🔒 Historia 2</div>
-            <!-- Añadir hasta Historia 15 -->
+            <div class="story" id="story3">🔒 Historia 3</div>
+            <div class="story" id="story4">🔒 Historia 4</div>
+            <div class="story" id="story5">🔒 Historia 5</div>
+            <div class="story" id="story6">🔒 Historia 6</div>
+            <div class="story" id="story7">🔒 Historia 7</div>
+            <div class="story" id="story8">🔒 Historia 8</div>
+            <div class="story" id="story9">🔒 Historia 9</div>
+            <div class="story" id="story10">🔒 Historia 10</div>
+            <div class="story" id="story11">🔒 Historia 11</div>
+            <div class="story" id="story12">🔒 Historia 12</div>
+            <div class="story" id="story13">🔒 Historia 13</div>
+            <div class="story" id="story14">🔒 Historia 14</div>
+            <div class="story" id="story15">🔒 Historia 15</div>
+            <button class="button" onclick="goBack()">Volver a las fechas</button>
         </div>
-        <button onclick="returnToContent()">↩️ Volver</button>
+
+        <h3>Ingresa una fecha:</h3>
+        <input type="date" id="dateInput">
+        <button class="button" onclick="checkDate()">Ver Historia</button>
+        <div id="historyContainer" class="hidden">
+            <h3>Historia:</h3>
+            <p id="historyText"></p>
+        </div>
+
+        <h3>Los secretos de los maestros:</h3>
+        <input type="text" id="letterInput" maxlength="7" placeholder="Introduce 7 letras aquí...">
     </div>
 
-    <!-- Sección de cajas de colores -->
-    <div id="crackSection" class="hidden">
-        <h3>Cajas de los Colores</h3>
-        <div class="caja roja">🔒 Roja</div>
-        <div class="caja verde">🔒 Verde</div>
-        <div class="caja azul">🔒 Azul</div>
-        <div class="caja blanca">🔒 Blanca</div>
-        <div class="caja negra">🔒 Negra</div>
-        <button onclick="returnToContent()">↩️ Volver</button>
-    </div>
+    <script>
+        function checkCode() {
+            const code = document.getElementById('codeInput').value;
+            if (code === "El Anillo Está Observando") {
+                document.getElementById('intro').classList.add('hidden');
+                document.getElementById('content').classList.remove('hidden');
+                document.getElementById('grieta').classList.remove('hidden');
+            } else {
+                document.getElementById('error').classList.remove('hidden');
+            }
+        }
 
-    <script src="script.js"></script>
+        function checkCrackCode() {
+            const crackCode = document.getElementById('crackInput').value;
+            if (crackCode === "El vacío") {
+                document.getElementById('crack').classList.remove('hidden');
+            } else {
+                alert('Código incorrecto. Intenta de nuevo.');
+            }
+        }
+
+        function toggleStories() {
+            const storiesDiv = document.getElementById('stories');
+            if (storiesDiv.style.display === "none" || storiesDiv.style.display === "") {
+                storiesDiv.style.display = "block";
+            } else {
+                storiesDiv.style.display = "none";
+            }
+        }
+
+        function goBack() {
+            document.getElementById('stories').style.display = "none";
+        }
+
+        function checkDate() {
+            const dateInput = document.getElementById('dateInput').value;
+            const historyText = document.getElementById('historyText');
+            if (dateInput === "2024-10-31") { // Ejemplo de fecha
+                historyText.textContent = "Este es el inicio, el viajero que nunca regresó ha regresado con malas noticias. Una guerra se aproxima.";
+                document.getElementById('historyContainer').classList.remove('hidden');
+            } else {
+                historyText.textContent = "No hay historia para esta fecha.";
+                document.getElementById('historyContainer').classList.remove('hidden');
+            }
+        }
+    </script>
 </body>
 </html>
-
