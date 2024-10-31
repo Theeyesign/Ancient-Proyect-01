@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
     <title>El Rincón Oscuro</title>
     <style>
         body {
@@ -11,37 +10,32 @@
             color: white;
             font-family: 'Shadows Into Light', cursive;
             text-align: center;
+            margin: 0;
+            padding: 0;
         }
 
-        #intro, #content, #grieta, #book, #stories {
-            margin: 20px;
+        #intro, #content, #grieta, #stories {
+            margin: auto;
             padding: 20px;
             border: 2px solid gray;
             border-radius: 10px;
             background: rgba(50, 50, 50, 0.8);
+            max-width: 600px;
+            display: none; /* Ocultar por defecto */
         }
 
-        #grieta, #stories {
-            display: none; /* Ocultas por defecto */
+        #intro {
+            display: block; /* Mostrar solo el intro inicialmente */
         }
 
-        .story {
-            margin: 10px;
+        input[type="text"] {
+            font-size: 20px;
             padding: 10px;
-            border: 2px solid red;
-            border-radius: 5px;
-            display: inline-block;
+            width: 80%; /* Ancho de la casilla de entrada */
+            margin-top: 10px;
         }
 
-        #crack {
-            display: none; /* Grieta oculta por defecto */
-        }
-
-        .key {
-            display: none; /* Candados ocultos por defecto */
-        }
-
-        .button {
+        button {
             background-color: #444;
             color: white;
             padding: 10px;
@@ -49,85 +43,96 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
+            margin-top: 10px;
             transition: background-color 0.3s;
         }
 
-        .button:hover {
+        button:hover {
             background-color: #666;
         }
 
-        #codeInput {
-            font-size: 18px;
+        .story {
+            margin: 10px;
             padding: 10px;
-            width: 400px; /* Ancho de la casilla de entrada */
+            border: 2px solid red;
+            border-radius: 5px;
+            display: block;
         }
     </style>
 </head>
 <body>
-    <div id="intro" class="text-container">
+    <div id="intro">
         <h1>¡Bienvenido a El Rincón Oscuro!</h1>
         <h2>Introduce el código: <strong>El Anillo Está Observando</strong></h2>
-        <input type="text" id="codeInput" placeholder="Introduce el código aquí...">
-        <button class="button" onclick="checkCode()">Enviar</button>
-        <p id="error" class="hidden">Código incorrecto. Intenta de nuevo.</p>
+        <input type="text" id="codeInput" placeholder="Código...">
+        <button onclick="checkCode()">Enviar</button>
+        <p id="error" style="color:red; display:none;">Código incorrecto. Intenta de nuevo.</p>
     </div>
 
-    <div id="content" class="hidden">
+    <div id="content">
         <h3>Los secretos de los maestros:</h3>
-        <input type="text" id="letterInput" maxlength="7" placeholder="Introduce 7 letras aquí...">
-        <button class="button" onclick="checkLetter()">Ver Grieta</button>
-
-        <div id="grieta" class="hidden">
+        <input type="text" id="letterInput" maxlength="7" placeholder="Introduce 7 letras...">
+        <button onclick="checkLetter()">Ver Grieta</button>
+        
+        <div id="grieta" style="display:none;">
             <h3>¡Has encontrado una grieta!</h3>
-            <button class="button" onclick="showCracks()">Ver jaulas</button>
-            <button class="button" onclick="goBackToContent()">Volver a las fechas</button>
+            <button onclick="showCracks()">Ver jaulas</button>
+            <button onclick="goBackToContent()">Volver a las fechas</button>
         </div>
 
-        <div id="book" onclick="showStories()" class="button">
+        <div id="book" style="margin-top: 20px; cursor: pointer;" onclick="showStories()">
             📖 Abre el libro de historias
         </div>
+    </div>
 
-        <div id="stories">
-            <h3>Historias Desbloqueadas</h3>
-            <div class="story">🔒 Historia 1</div>
-            <div class="story">🔒 Historia 2</div>
-            <div class="story">🔒 Historia 3</div>
-            <div class="story">🔒 Historia 4</div>
-            <div class="story">🔒 Historia 5</div>
-            <div class="story">🔒 Historia 6</div>
-            <div class="story">🔒 Historia 7</div>
-            <div class="story">🔒 Historia 8</div>
-            <div class="story">🔒 Historia 9</div>
-            <div class="story">🔒 Historia 10</div>
-            <div class="story">🔒 Historia 11</div>
-            <div class="story">🔒 Historia 12</div>
-            <div class="story">🔒 Historia 13</div>
-            <div class="story">🔒 Historia 14</div>
-            <div class="story">🔒 Historia 15</div>
-            <button class="button" onclick="goBack()">Volver a las fechas</button>
-        </div>
+    <div id="stories">
+        <h3>Historias Desbloqueadas</h3>
+        <div class="story">🔒 Historia 1</div>
+        <div class="story">🔒 Historia 2</div>
+        <div class="story">🔒 Historia 3</div>
+        <div class="story">🔒 Historia 4</div>
+        <div class="story">🔒 Historia 5</div>
+        <div class="story">🔒 Historia 6</div>
+        <div class="story">🔒 Historia 7</div>
+        <div class="story">🔒 Historia 8</div>
+        <div class="story">🔒 Historia 9</div>
+        <div class="story">🔒 Historia 10</div>
+        <div class="story">🔒 Historia 11</div>
+        <div class="story">🔒 Historia 12</div>
+        <div class="story">🔒 Historia 13</div>
+        <div class="story">🔒 Historia 14</div>
+        <div class="story">🔒 Historia 15</div>
+        <button onclick="goBack()">Volver a las fechas</button>
     </div>
 
     <script>
         function checkCode() {
             const code = document.getElementById('codeInput').value;
             if (code === "El Anillo Está Observando") {
-                document.getElementById('intro').classList.add('hidden');
-                document.getElementById('content').classList.remove('hidden');
+                document.getElementById('intro').style.display = "none";
+                document.getElementById('content').style.display = "block";
             } else {
-                document.getElementById('error').classList.remove('hidden');
+                document.getElementById('error').style.display = "block";
+            }
+        }
+
+        function checkLetter() {
+            const letterInput = document.getElementById('letterInput').value;
+            if (letterInput.length === 7) {
+                document.getElementById('grieta').style.display = "block";
+            } else {
+                alert("Introduce exactamente 7 letras.");
             }
         }
 
         function showCracks() {
-            // Lógica para mostrar las jaulas en forma de estrella
             alert("Aquí se mostrarán las jaulas en forma de estrella.");
-            // Código para crear visualmente las jaulas.
+            // Aquí puedes añadir la lógica para mostrar las jaulas.
         }
 
         function goBackToContent() {
-            document.getElementById('grieta').classList.add('hidden');
-            document.getElementById('content').classList.remove('hidden');
+            document.getElementById('grieta').style.display = "none";
+            document.getElementById('content').style.display = "block";
         }
 
         function showStories() {
@@ -137,16 +142,6 @@
         function goBack() {
             document.getElementById('stories').style.display = "none";
         }
-
-        function checkLetter() {
-            const letterInput = document.getElementById('letterInput').value;
-            if (letterInput.length === 7) {
-                document.getElementById('grieta').classList.remove('hidden');
-            } else {
-                alert("Introduce exactamente 7 letras.");
-            }
-        }
     </script>
 </body>
 </html>
-
