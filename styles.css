@@ -1,34 +1,47 @@
-/* Estilos principales */
 body {
     background-color: black;
-    color: #ddd;
-    font-family: "Shadows Into Light", cursive;
+    color: white;
+    font-family: 'Shadows Into Light', cursive; /* Cambia la fuente aquí */
+    text-align: center; /* Centrando el texto */
+}
+
+.text-container {
+    margin: 50px auto;
+    padding: 20px;
+    border: 2px solid gray;
+    border-radius: 15px;
+    width: 300px; /* Ancho de la caja de entrada */
+}
+
+.input-large {
+    width: 80%; /* Ancho de la caja de texto */
+    font-size: 20px; /* Tamaño de la fuente */
+}
+
+.hidden {
+    display: none;
+}
+
+#stories, #cages {
+    margin: 20px auto;
+    padding: 20px;
+    border: 2px solid gray;
+    border-radius: 15px;
+    width: 300px; /* Ancho de la caja de historias */
+}
+
+.cage-container {
+    display: flex;
+    justify-content: space-around; /* Espaciado entre las jaulas */
+    flex-wrap: wrap; /* Permitir que las jaulas se ajusten a múltiples líneas */
+}
+
+.cage {
+    border: 2px solid gray;
+    border-radius: 15px;
+    width: 80px; /* Ancho de las jaulas */
     text-align: center;
-}
-
-.text-container, .hidden {
-    display: none;
-}
-
-#intro {
-    display: block;
-    margin-top: 20vh;
-}
-
-#content, #storySection, #crackSection {
-    border: 2px solid #555;
+    margin: 10px;
     padding: 10px;
-    margin: 10px auto;
-    width: 80%;
-    max-width: 600px;
-}
-
-#book {
-    cursor: pointer;
-    font-size: 2em;
-}
-
-#historyContainer, #errorMessage {
-    display: none;
 }
 
