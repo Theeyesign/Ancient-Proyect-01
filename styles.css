@@ -13,6 +13,12 @@ body {
     width: 300px; /* Ancho de la caja de entrada */
 }
 
+.code-container {
+    padding: 10px;
+    border: 2px solid gray;
+    border-radius: 15px;
+}
+
 .input-large {
     width: 80%; /* Ancho de la caja de texto */
     font-size: 20px; /* Tamaño de la fuente */
