@@ -1,12 +1,15 @@
 function checkCode() {
     const codeInput = document.getElementById("codeInput").value;
     const error = document.getElementById("error");
-    if (codeInput === "TheRingIsWatching" || codeInput === "El vacío") {
+    
+    if (codeInput === "TheRingIsWatching") {
         document.getElementById("intro").classList.add("hidden");
         document.getElementById("content").classList.remove("hidden");
-        if (codeInput === "El vacío") {
-            document.getElementById("grieta").classList.remove("hidden");
-        }
+        error.classList.add("hidden");
+    } else if (codeInput === "El vacío") {
+        document.getElementById("intro").classList.add("hidden");
+        document.getElementById("content").classList.remove("hidden");
+        document.getElementById("grieta").classList.remove("hidden");
         error.classList.add("hidden");
     } else {
         error.classList.remove("hidden");
@@ -33,3 +36,4 @@ function goBack() {
 function goBackFromCages() {
     document.getElementById("cages").classList.add("hidden");
 }
+
