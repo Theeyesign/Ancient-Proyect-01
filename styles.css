@@ -1,44 +1,34 @@
+/* Estilos principales */
 body {
-    background-color: #000;
-    color: #fff;
-    font-family: 'Courier New', Courier, monospace;
+    background-color: black;
+    color: #ddd;
+    font-family: "Shadows Into Light", cursive;
     text-align: center;
 }
 
-.text-container {
-    margin-top: 50px;
-}
-
-.hidden {
+.text-container, .hidden {
     display: none;
 }
 
-.hole {
+#intro {
+    display: block;
+    margin-top: 20vh;
+}
+
+#content, #storySection, #crackSection {
+    border: 2px solid #555;
+    padding: 10px;
+    margin: 10px auto;
+    width: 80%;
+    max-width: 600px;
+}
+
+#book {
     cursor: pointer;
-    margin: 20px 0;
-    font-size: 50px; /* Tamaño de la grieta */
+    font-size: 2em;
 }
 
-#stories {
-    margin-top: 20px;
-}
-
-.story {
-    border: 2px solid #444;
-    padding: 10px;
-    margin: 5px;
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-#historyContainer {
-    margin-top: 20px;
-}
-
-input[type="text"], input[type="date"] {
-    padding: 10px;
-    font-size: 20px;
-    border-radius: 5px;
-    border: 1px solid #444;
-    margin: 10px 0;
+#historyContainer, #errorMessage {
+    display: none;
 }
 
